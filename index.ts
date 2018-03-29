@@ -166,9 +166,9 @@ export class SqlProvider {
     /**
      * UPDATE SQL command in fluent interface way. 
      * Only provide the properties that will be updated.
-     * @param {object} data properties that will be updated in a table
+     * @param {any} data properties that will be updated in a table
      */
-    async update(data: object) {
+    async update(data: any) {
 
         this.checkTableName();
         this.checkIdField(data);
@@ -367,13 +367,13 @@ export class SqlProvider {
 
 
     assign(...args: any[]): any {
-        if (typeof Object.assign !== 'function') {
+        if (typeof (<any>Object).assign !== 'function') {
             // use the old-school shallow extend method 
             return this._baseExtend(args[0], [].slice.call(args, 1), false);
         }
 
         // use the built in ES6 Object.assign method 
-        return Object.assign.apply(null, args);
+        return (<any>Object).assign.apply(null, args);
     }
 
     /** 

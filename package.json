@@ -25,6 +25,7 @@
     "dependencies": {
         "@angular/core": "^5.2.9",
         "@ionic-native/sqlite": "^4.6.0",
+        "@types/es6-promise": "^3.3.0",
         "ionic-angular": "^3.9.2"
     }
 }
