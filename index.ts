@@ -71,47 +71,79 @@ export class SqlProvider {
         await this.query(`CREATE TABLE IF NOT EXISTS ${table}(id INTEGER PRIMARY KEY AUTOINCREMENT, ${schema.join()})`);
     }
 
-    table(name) {
+    /**
+     * Set table name
+     * @param {string} name name of table
+     */
+    table(name: string) {
         this.tableName = name;
         return this;
     }
 
+    /**
+     * Reset table name after a query
+     */
     resetTableName() {
         this.tableName = '';
     }
 
+    /**
+     * Reset where clausule after query
+     */
     resetWhereClausule() {
         this.whereClausule = '';
     }
 
-    where(condition) {
+    /**
+     * Prepare the where condition
+     * @param {string} condition 
+     */
+    where(condition: string) {
         this.whereClausule = `${this.whereClausule} ${condition}`;
         return this;
     }
 
+    /**
+     * Add or clause in Where Condition
+     */
     or() {
         this.whereClausule = `${this.whereClausule} OR `;
         return this;
     }
 
+    /**
+     * Add and clause in Where Condition
+     */
     and() {
         this.whereClausule = `${this.whereClausule} AND `;
         return this;
     }
 
+    /**
+     * Check if table name was declared before a query
+     */
     checkTableName() {
         if (this.tableName === '' || this.tableName === null || this.tableName === undefined) {
             throw new Error("You need to set the 'table' name before insert method");
         }
     }
 
-    checkIdField(data = {}) {
+    /**
+     * Check if data contains the id property (PK of each table) 
+     * if user not provide a custom Where Clausule
+     * @param {object} data properties of a table
+     */
+    checkIdField(data : object = {}) {
         if (!data.hasOwnProperty('id') && this.whereClausule === '') {
             throw new Error("You need to pass the 'id' key in data object");
         }
     }
 
-    async insert(data) {
+    /**
+     * INSERT SQL command in fluent interface way.
+     * @param {object} data properties that will be recorded in a table
+     */ 
+    async insert(data: object) {
 
         this.checkTableName();
 
@@ -131,8 +163,12 @@ export class SqlProvider {
     }
 
 
-
-    async update(data) {
+    /**
+     * UPDATE SQL command in fluent interface way. 
+     * Only provide the properties that will be updated.
+     * @param {object} data properties that will be updated in a table
+     */
+    async update(data: object) {
 
         this.checkTableName();
         this.checkIdField(data);
@@ -160,6 +196,9 @@ export class SqlProvider {
 
     }
 
+    /**
+     * SELECT * SQL command in fluent interface way.
+     */
     async all() {
 
         this.checkTableName();
@@ -175,6 +214,12 @@ export class SqlProvider {
         return results;
     }
 
+    /**
+     * SELECT SQL command in fluent interface way.
+     * The user can select all data, select by id 
+     * or select using multiple where clausule
+     * @param {object} data can contains the id field for Where clause
+     */
     async select(data = null) {
         let clausule = '';
         this.checkTableName();
@@ -204,7 +249,11 @@ export class SqlProvider {
         }
     }
 
-
+    /**
+     * DELETE SQL in a fluent interface way.
+     * User can provide a specific where clause.
+     * @param {object} data can contain the id key used in delete
+     */
     async delete(data = null) {
         this.checkTableName();
         let clausule = '';
@@ -229,6 +278,8 @@ export class SqlProvider {
             console.error(err);
         }
     }
+
+    // Methods for old Ionic Storage Interface
 
     _getBackupLocation(dbFlag: number): number {
         switch (dbFlag) {
