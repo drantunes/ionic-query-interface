@@ -19,9 +19,10 @@ Then, install the package:
 ## Configuration
 
 In your `app.module.ts` import the `SqlProvider` and `SQLite` modules:
+
 ```javascript
-	import { SQLite } from '@ionic-native/sqlite';
-    import { SqlProvider } from 'ionic-query-interface';
+import { SQLite } from '@ionic-native/sqlite';
+import { SqlProvider } from 'ionic-query-interface';
 ```
 
 Then,  add the `SqlProvider` and `SQLite` on `providers` array: 
@@ -37,10 +38,10 @@ Then,  add the `SqlProvider` and `SQLite` on `providers` array:
 In the class that you want to use the SQLite database, just import the `SqlProvide` and inject in class constructor. All methods will be available in `this.db` property.
 
 ```javascript
-    import  { SqlProvider } from 'ionic-query-interface';
-    ...
-    ...
-	    constructor(public db : SqlProvider ...) {
+import  { SqlProvider } from 'ionic-query-interface';
+...
+...
+	constructor(public db : SqlProvider ...) {
 ````
 
 ## Methods
