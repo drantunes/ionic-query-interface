@@ -253,6 +253,7 @@ var SqlProvider = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         this.resetWhereClausule();
+                        this.resetTableName();
                         return [2 /*return*/, response];
                     case 3:
                         err_3 = _a.sent();
@@ -281,6 +282,7 @@ var SqlProvider = /** @class */ (function () {
                         for (index = 0; index < rows.length; index++) {
                             results.push(rows.item(index));
                         }
+                        this.resetTableName();
                         return [2 /*return*/, results];
                 }
             });
@@ -315,6 +317,7 @@ var SqlProvider = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         this.resetWhereClausule();
+                        this.resetTableName();
                         rows = response.res.rows;
                         results = [];
                         for (index = 0; index < rows.length; index++) {
@@ -361,6 +364,7 @@ var SqlProvider = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         this.resetWhereClausule();
+                        this.resetTableName();
                         return [2 /*return*/, response];
                     case 3:
                         err_5 = _a.sent();

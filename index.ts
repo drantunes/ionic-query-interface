@@ -199,6 +199,7 @@ export class SqlProvider {
         try {
             let response = await this.query(`UPDATE ${this.tableName} SET ${update.join()} WHERE ${where}`, vals);
             this.resetWhereClausule();
+            this.resetTableName();
             return response;
         }
         catch (err) {
@@ -221,7 +222,7 @@ export class SqlProvider {
         for (let index = 0; index < rows.length; index++) {
             results.push(rows.item(index));
         }
-
+        this.resetTableName();
         return results;
     }
 
@@ -246,6 +247,7 @@ export class SqlProvider {
         try {
             let response = await this.query(`SELECT * FROM ${this.tableName} ${clausule}`);
             this.resetWhereClausule();
+            this.resetTableName();
             let rows = response.res.rows;
             let results = [];
 
@@ -283,6 +285,7 @@ export class SqlProvider {
         try {
             let response = await this.query(`DELETE FROM ${this.tableName} WHERE ${clausule}`);
             this.resetWhereClausule();
+            this.resetTableName();
             return response;
         }
         catch (err) {
