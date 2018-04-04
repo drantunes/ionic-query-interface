@@ -155,9 +155,28 @@ var SqlProvider = /** @class */ (function () {
      * Check if table name was declared before a query
      */
     SqlProvider.prototype.checkTableName = function () {
-        if (this.tableName === '' || this.tableName === null || this.tableName === undefined) {
-            throw new Error("You need to set the 'table' name before insert method");
-        }
+        return __awaiter(this, void 0, void 0, function () {
+            var results, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (this.tableName === '' || this.tableName === null || this.tableName === undefined) {
+                            throw new Error("You need to set the 'table' name before insert method");
+                        }
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.query("SELECT * FROM " + this.tableName + " LIMIT 1")];
+                    case 2:
+                        results = _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        err_1 = _a.sent();
+                        throw new Error("You need to create the " + this.tableName + " schema first. Check the createTable method in documentation.");
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
     };
     /**
      * Check if data contains the id property (PK of each table)
@@ -176,7 +195,7 @@ var SqlProvider = /** @class */ (function () {
      */
     SqlProvider.prototype.insert = function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var cols, mask, vals, response, err_1;
+            var cols, mask, vals, response, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -198,8 +217,8 @@ var SqlProvider = /** @class */ (function () {
                         this.resetTableName();
                         return [2 /*return*/, response.res.insertId];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new Error(err_1);
+                        err_2 = _a.sent();
+                        throw new Error(err_2);
                     case 4: return [2 /*return*/];
                 }
             });
@@ -212,7 +231,7 @@ var SqlProvider = /** @class */ (function () {
      */
     SqlProvider.prototype.update = function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var update, vals, where, response, err_2;
+            var update, vals, where, response, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -236,8 +255,8 @@ var SqlProvider = /** @class */ (function () {
                         this.resetWhereClausule();
                         return [2 /*return*/, response];
                     case 3:
-                        err_2 = _a.sent();
-                        console.error(err_2);
+                        err_3 = _a.sent();
+                        console.error(err_3);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
@@ -276,7 +295,7 @@ var SqlProvider = /** @class */ (function () {
     SqlProvider.prototype.select = function (data) {
         if (data === void 0) { data = null; }
         return __awaiter(this, void 0, void 0, function () {
-            var clausule, response, rows, results, index, err_3;
+            var clausule, response, rows, results, index, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -303,8 +322,8 @@ var SqlProvider = /** @class */ (function () {
                         }
                         return [2 /*return*/, results];
                     case 3:
-                        err_3 = _a.sent();
-                        console.error(err_3);
+                        err_4 = _a.sent();
+                        console.error(err_4);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
@@ -319,7 +338,7 @@ var SqlProvider = /** @class */ (function () {
     SqlProvider.prototype.delete = function (data) {
         if (data === void 0) { data = null; }
         return __awaiter(this, void 0, void 0, function () {
-            var clausule, response, err_4;
+            var clausule, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -344,8 +363,8 @@ var SqlProvider = /** @class */ (function () {
                         this.resetWhereClausule();
                         return [2 /*return*/, response];
                     case 3:
-                        err_4 = _a.sent();
-                        console.error(err_4);
+                        err_5 = _a.sent();
+                        console.error(err_5);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }

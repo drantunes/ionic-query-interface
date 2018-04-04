@@ -122,9 +122,15 @@ export class SqlProvider {
     /**
      * Check if table name was declared before a query
      */
-    checkTableName() {
+    async checkTableName() {
         if (this.tableName === '' || this.tableName === null || this.tableName === undefined) {
             throw new Error("You need to set the 'table' name before insert method");
+        }
+        try {
+            let results = await this.query(`SELECT * FROM ${this.tableName} LIMIT 1`);
+        }
+        catch(err) {
+            throw new Error(`You need to create the ${this.tableName} schema first. Check the createTable method in documentation.`);
         }
     }
 
