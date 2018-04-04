@@ -104,9 +104,7 @@ var SqlProvider = /** @class */ (function () {
                         schema = [];
                         Object.keys(structure).forEach(function (key) { return schema.push(key + " " + structure[key]); });
                         return [4 /*yield*/, this.query("CREATE TABLE IF NOT EXISTS " + table + "(id INTEGER PRIMARY KEY AUTOINCREMENT, " + schema.join() + ")")];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
@@ -178,7 +176,7 @@ var SqlProvider = /** @class */ (function () {
      */
     SqlProvider.prototype.insert = function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var cols, mask, vals, response;
+            var cols, mask, vals, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -191,11 +189,18 @@ var SqlProvider = /** @class */ (function () {
                             mask.push('?');
                             vals.push(data[key]);
                         });
-                        return [4 /*yield*/, this.query("INSERT INTO " + this.tableName + " (" + cols.join() + ") VALUES (" + mask.join() + ")", vals)];
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.query("INSERT INTO " + this.tableName + " (" + cols.join() + ") VALUES (" + mask.join() + ")", vals)];
+                    case 2:
                         response = _a.sent();
                         this.resetTableName();
                         return [2 /*return*/, response.res.insertId];
+                    case 3:
+                        err_1 = _a.sent();
+                        throw new Error(err_1);
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -207,7 +212,7 @@ var SqlProvider = /** @class */ (function () {
      */
     SqlProvider.prototype.update = function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var update, vals, where, response, err_1;
+            var update, vals, where, response, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -231,8 +236,8 @@ var SqlProvider = /** @class */ (function () {
                         this.resetWhereClausule();
                         return [2 /*return*/, response];
                     case 3:
-                        err_1 = _a.sent();
-                        console.error(err_1);
+                        err_2 = _a.sent();
+                        console.error(err_2);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
@@ -271,7 +276,7 @@ var SqlProvider = /** @class */ (function () {
     SqlProvider.prototype.select = function (data) {
         if (data === void 0) { data = null; }
         return __awaiter(this, void 0, void 0, function () {
-            var clausule, response, rows, results, index, err_2;
+            var clausule, response, rows, results, index, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -298,8 +303,8 @@ var SqlProvider = /** @class */ (function () {
                         }
                         return [2 /*return*/, results];
                     case 3:
-                        err_2 = _a.sent();
-                        console.error(err_2);
+                        err_3 = _a.sent();
+                        console.error(err_3);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
@@ -314,7 +319,7 @@ var SqlProvider = /** @class */ (function () {
     SqlProvider.prototype.delete = function (data) {
         if (data === void 0) { data = null; }
         return __awaiter(this, void 0, void 0, function () {
-            var clausule, response, err_3;
+            var clausule, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -339,8 +344,8 @@ var SqlProvider = /** @class */ (function () {
                         this.resetWhereClausule();
                         return [2 /*return*/, response];
                     case 3:
-                        err_3 = _a.sent();
-                        console.error(err_3);
+                        err_4 = _a.sent();
+                        console.error(err_4);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }

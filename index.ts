@@ -68,7 +68,7 @@ export class SqlProvider {
     async createTable(table: string, structure: object) {
         let schema = [];
         Object.keys(structure).forEach((key) => schema.push(`${key} ${structure[key]}`));
-        await this.query(`CREATE TABLE IF NOT EXISTS ${table}(id INTEGER PRIMARY KEY AUTOINCREMENT, ${schema.join()})`);
+        return await this.query(`CREATE TABLE IF NOT EXISTS ${table}(id INTEGER PRIMARY KEY AUTOINCREMENT, ${schema.join()})`);
     }
 
     /**
@@ -157,9 +157,14 @@ export class SqlProvider {
             vals.push(data[key]);
         });
 
-        let response = await this.query(`INSERT INTO ${this.tableName} (${cols.join()}) VALUES (${mask.join()})`, vals);
-        this.resetTableName();
-        return response.res.insertId;
+        try {
+            let response = await this.query(`INSERT INTO ${this.tableName} (${cols.join()}) VALUES (${mask.join()})`, vals);
+            this.resetTableName();
+            return response.res.insertId;
+        }
+        catch(err) {
+            throw new Error(err);
+        }
     }
 
 
