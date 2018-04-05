@@ -168,6 +168,15 @@ async selectBy(){
 }
 ```
 
+## Raw queries
+
+You can use the `query` method to run raw SQL queries. Example: 
+
+```javascript
+	let transaction = await this.db.table("users").query("SELECT * FROM users WHERE name LIKE '%John%'");
+    this.users = transaction.res.rows;
+```
+
 ## API 
 
 * **`open(db_name)`**: create or open a database connection with `db_name : <string>` provided. 
@@ -191,3 +200,5 @@ async selectBy(){
 * **`and()`**: sets the SQL `AND` condition to join two `where` clausule. Returns the class instance for the chain.
 
 * **`or()`**: sets the SQL `OR` condition to join two `where` clausule. Returns the class instance for the chain.
+
+* **`query(sql)`**: run a SQL raw query in the database. Return a SQL Transaction.

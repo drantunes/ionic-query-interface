@@ -1,6 +1,6 @@
 {
     "name": "ionic-query-interface",
-    "version": "0.0.9",
+    "version": "0.1.0",
     "description": "This package provide support for old 'query' method of Ionic Storage, fluid SQL methods and fallback to WebSQL when you're developing in Browser.",
     "main": "index.js",
     "scripts": {
