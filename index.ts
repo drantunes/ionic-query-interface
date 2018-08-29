@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform } from '@ionic/angular';
 import { SQLite } from '@ionic-native/sqlite';
 
 const win: any = window;
@@ -8,7 +8,9 @@ export const isFunction = (val: any) => typeof val === 'function';
 export const isObject = (val: any) => typeof val === 'object';
 export const isArray = Array.isArray;
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class SqlProvider {
 
     static BACKUP_LOCAL = 2;
