@@ -44,7 +44,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { SQLite } from '@ionic-native/sqlite';
+import { SQLite } from '@ionic-native/sqlite/ngx';
 var win = window;
 export var isFunction = function (val) { return typeof val === 'function'; };
 export var isObject = function (val) { return typeof val === 'object'; };
